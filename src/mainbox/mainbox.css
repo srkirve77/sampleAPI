@@ -1,0 +1,13 @@
+.createbox {
+    width: 150vh;
+    margin: 30px auto;
+    overflow: auto;
+    height: 80vh;
+    border: 10px solid #4856fd;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.title {
+    margin-left: 60vh;
+}
