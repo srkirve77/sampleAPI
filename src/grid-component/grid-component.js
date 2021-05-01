@@ -37,8 +37,18 @@ const GridComponent= () => {
     }
 
     //Deleting user
-    const deleteUser = (id) => {
-        setUsers(Users.filter((user) => user.id !== id))
+    const deleteUser = async (id) => {
+        const res = await
+            fetch('https://gorest.co.in/public-api/users/'+id,
+            {
+                method:'DELETE',
+                headers : {
+                'Content-Type': 'application/json' ,
+                'Authorization':'Bearer 9d8224224d0da981dc6768d900f96f7e7f5987d55971546ca180338c227e6c95'    
+                }
+            })
+        const data = await res.json()
+        console.log(data)
     }
 
 
@@ -58,7 +68,12 @@ const GridComponent= () => {
         console.log(data)
         console.log(JSON.stringify(user))
         if(data.code/100!==2) {
-            alert(data.data[0].field +" "+data.data[0].message)
+            var i;
+            var msg = ""
+            for(i = 0 ; i < data.data.length ; i++) {
+                msg = msg + data.data[i].field +" "+data.data[i].message +","
+            }
+            alert(msg)
         }
     }
 
@@ -68,9 +83,11 @@ const GridComponent= () => {
 
     return (
         <Paper>
+            <label className='pagelabel'>Page</label>
+            <input className='pageinput' type="text" placeholder='1' onChange = { (e) => setPageNo(e.target.value)}/>
             { showAddUser && <AddUser style={{marginLeft:1000}} onAdd={addUser}/>}
             { !showAddUser ? 
-            <Button style ={{backgroundColor:'#4856fd',marginLeft:1290}} onClick={onClickAddUser}> Add User </Button> : 
+            <Button style ={{backgroundColor:'#4856fd',marginLeft:1290, marginTop:-40}} onClick={onClickAddUser}> Add User </Button> : 
             <Button style ={{backgroundColor:'red',marginLeft:1320}} onClick={onClickAddUser}> Cancel </Button> 
             }
             <Table>
@@ -89,9 +106,7 @@ const GridComponent= () => {
                     <User users={Users} onDelete={deleteUser}></User>
                 </TableBody>
             </Table>
-            <label className='pagelabel'>Page</label>
-            <input className='pageinput' type="text" placeholder='1' onChange = { (e) => setPageNo(e.target.value)}/>
-            
+           
         </Paper>
     )
 }
