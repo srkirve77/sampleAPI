@@ -16,9 +16,11 @@ const GridComponent= () => {
     const [showAddUser, setShowAddUser] = useState(false)
     const [showUpdateUser, setShowUpdateUser] = useState(false)
     const [Users, setUsers]= useState([])
-    
+    const [pageNo, setPageNo] = useState(1)
+
     useEffect(() => {
         const getUsers = async () => {
+
             const users = await fetchUsers()
             setUsers(users)
         }
@@ -28,7 +30,8 @@ const GridComponent= () => {
 
     const fetchUsers = async () => {
         const res = await 
-            fetch('https://gorest.co.in/public-api/users')
+            fetch('https://gorest.co.in/public-api/users?page='+pageNo,{              
+            })
         const data = await res.json()
         return data.data
     }
@@ -73,6 +76,9 @@ const GridComponent= () => {
                     <User users={Users} onDelete={deleteUser}></User>
                 </TableBody>
             </Table>
+            <label className='pagelabel'>Page</label>
+            <input className='pageinput' type="text" placeholder='1' onChange = { (e) => setPageNo(e.target.value)}/>
+            
         </Paper>
     )
 }
