@@ -43,13 +43,26 @@ const GridComponent= () => {
 
 
     //Creating User
-    const addUser = (user) => {
-        const id = '23'
-        const newUser = { id, ...user }
-        setUsers([...Users, newUser])
+    const addUser = async (user) => {
+        const res = await
+            fetch('https://gorest.co.in/public-api/users',
+            {
+                method:'POST',
+                headers : {
+                'Content-Type': 'application/json' ,
+                'Authorization':'Bearer 9d8224224d0da981dc6768d900f96f7e7f5987d55971546ca180338c227e6c95'    
+                },
+                body: JSON.stringify(user),
+            })
+        const data = await res.json()
+        console.log(data)
+        console.log(JSON.stringify(user))
+        if(data.code/100!==2) {
+            alert(data.data[0].field +" "+data.data[0].message)
+        }
     }
 
-    const onClickAddUser = (onClick) => {
+    const onClickAddUser = () => {
         setShowAddUser(!showAddUser)
     }
 
@@ -57,8 +70,8 @@ const GridComponent= () => {
         <Paper>
             { showAddUser && <AddUser style={{marginLeft:1000}} onAdd={addUser}/>}
             { !showAddUser ? 
-            <Button style ={{backgroundColor:'#4856fd',marginLeft:1250}} onClick={onClickAddUser}> Add User </Button> : 
-            <Button style ={{backgroundColor:'red',marginLeft:1319}} onClick={onClickAddUser}> Cancel </Button> 
+            <Button style ={{backgroundColor:'#4856fd',marginLeft:1290}} onClick={onClickAddUser}> Add User </Button> : 
+            <Button style ={{backgroundColor:'red',marginLeft:1320}} onClick={onClickAddUser}> Cancel </Button> 
             }
             <Table>
                 <TableHead>

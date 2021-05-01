@@ -7,18 +7,21 @@ const AddUser = ({ onAdd}) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [gender, setGender] = useState('')
-    const [status, setStatus] = useState('')
+    const [status, setStatus] = useState('Inactive')
 
     const onSubmit = (e) => {
 
 
         e.preventDefault()
 
-        onAdd({ name, email, gender, status })
+        onAdd({name,email ,gender, status })
+        
         setName('')
         setEmail('')
         setGender('none')
-        setStatus('inactive')
+        setStatus('Inactive')
+
+
     }
 
     return (
@@ -49,8 +52,8 @@ const AddUser = ({ onAdd}) => {
                     onChange={(e) => setGender(e.target.value)} 
                 >
                     <option value="none">None</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
             </div>
             <div className='form-control'>    
@@ -59,8 +62,8 @@ const AddUser = ({ onAdd}) => {
                     value='inactive' 
                     onChange={(e) => setStatus(e.target.value)}
                 >
-                    <option value="inactive">Inactive</option>
-                    <option value="active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Active">Active</option>
                 </select>
             </div>
                 <Button style={{ backgroundColor:'#4856fd',marginLeft:10,marginBottom:-50,width:40}} onClick={onSubmit}>Submit</Button>
