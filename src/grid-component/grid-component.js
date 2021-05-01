@@ -11,12 +11,14 @@ import User from '../user-component/user-component'
 import { useState, useEffect } from 'react';
 import AddUser from '../adduser-component/adduser-component'
 import './grid-component.css';
+import UpdateUser from '../updateuser-component/updateuser-component';
 
 const GridComponent= () => {
     const [showAddUser, setShowAddUser] = useState(false)
     const [showUpdateUser, setShowUpdateUser] = useState(false)
     const [Users, setUsers]= useState([])
     const [pageNo, setPageNo] = useState(1)
+    const [userToUpdate, setUserToUpdate] = useState('')
 
     useEffect(() => {
         const getUsers = async () => {
@@ -34,6 +36,39 @@ const GridComponent= () => {
             })
         const data = await res.json()
         return data.data
+    }
+    //set user to Update 
+    const updateUser = (user) => {
+        setShowUpdateUser(!showUpdateUser)
+        console.log(user)
+        setUserToUpdate(user)
+    }
+
+    //update user
+    const updateServer = async (user) => {
+        setShowUpdateUser(!showUpdateUser)
+        console.log(user)
+        const res = await
+            fetch('https://gorest.co.in/public-api/users/'+user.id,
+            {
+                method:'PUT',
+                headers : {
+                'Content-Type': 'application/json' ,
+                'Authorization':'Bearer 9d8224224d0da981dc6768d900f96f7e7f5987d55971546ca180338c227e6c95'    
+                },
+                body: JSON.stringify(user),
+            })
+        const data = await res.json()
+        console.log(data)
+        console.log(JSON.stringify(user))
+        if(data.code/100!==2) {
+            var i;
+            var msg = ""
+            for(i = 0 ; i < data.data.length ; i++) {
+                msg = msg + data.data[i].field +" "+data.data[i].message +","
+            }
+            alert(msg)
+        }
     }
 
     //Deleting user
@@ -85,8 +120,9 @@ const GridComponent= () => {
         <Paper>
             <label className='pagelabel'>Page</label>
             <input className='pageinput' type="text" placeholder='1' onChange = { (e) => setPageNo(e.target.value)}/>
+            { showUpdateUser && <UpdateUser style={{marginLeft:1000}} user = {userToUpdate} ToUpdate={updateServer}/>}
             { showAddUser && <AddUser style={{marginLeft:1000}} onAdd={addUser}/>}
-            { !showAddUser ? 
+            { !showAddUser ?
             <Button style ={{backgroundColor:'#4856fd',marginLeft:1290, marginTop:-40}} onClick={onClickAddUser}> Add User </Button> : 
             <Button style ={{backgroundColor:'red',marginLeft:1320}} onClick={onClickAddUser}> Cancel </Button> 
             }
@@ -103,7 +139,7 @@ const GridComponent= () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <User users={Users} onDelete={deleteUser}></User>
+                    <User users={Users} onDelete={deleteUser} onUpdate = {updateUser}></User>
                 </TableBody>
             </Table>
            

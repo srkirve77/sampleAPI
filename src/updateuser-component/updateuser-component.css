@@ -1,8 +1,8 @@
-.add-form {
-    margin-left: 125vh;
+.update-form {
+    margin-left: 0vh;
 }
 
-.form-control {
+.update-form-control {
     padding: 1vh;
 }
 
@@ -11,7 +11,7 @@ input {
 }
 
 select {
-    margin-left: 1vh;
+    margin-left: 2vh;
 }
 
 Button {

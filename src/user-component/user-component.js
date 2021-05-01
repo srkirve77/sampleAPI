@@ -3,8 +3,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import {FaTimes} from 'react-icons/fa';
 import UpdateUser from '../updateuser-component/updateuser-component'
+import EditIcon from '@material-ui/icons/Edit';
 
-const User = ({users, onDelete}) =>  {
+const User = ({users, onDelete, onUpdate}) =>  {
     return (
         <>
         {
@@ -16,7 +17,10 @@ const User = ({users, onDelete}) =>  {
                         <TableCell align="center" >{user.email}</TableCell>
                         <TableCell align="center">{user.gender}</TableCell>
                         <TableCell align="center">{user.status}</TableCell>
-                        <UpdateUser user={user}/>
+                        <TableCell align="center">
+                            <EditIcon style = {{ color:'#4856fd',
+                                cursor:'pointer'}} onClick = {() => onUpdate(user)}/>
+                        </TableCell>
                         <TableCell align="center"><FaTimes style = {{ color:'#4856fd',
                         cursor:'pointer'}} onClick = {() => onDelete(user.id)}/>
                         </TableCell>

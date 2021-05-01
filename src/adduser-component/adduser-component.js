@@ -59,14 +59,14 @@ const AddUser = ({ onAdd}) => {
             <div className='form-control'>    
                 <label>Status</label>
                 <select 
-                    value='inactive' 
+                    value={status} 
                     onChange={(e) => setStatus(e.target.value)}
                 >
                     <option value="Inactive">Inactive</option>
                     <option value="Active">Active</option>
                 </select>
             </div>
-                <Button style={{ backgroundColor:'#4856fd',marginLeft:10,marginBottom:-50,width:40}} onClick={onSubmit}>Submit</Button>
+                <Button style={{ backgroundColor:'#4856fd',marginLeft:10,marginBottom:-50,width:40}} onClick={onSubmit}>Save</Button>
         </form>
     )
 }
