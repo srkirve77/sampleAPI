@@ -1,11 +1,11 @@
 import './mainbox.css'
-import ListOfUsers from '../grid/listOfUsers'
+import GridComponent from '../grid-component/grid-component'
 
 const Mainbox = (props) => {
     return (
             <div className = "createbox">
                     <h1 className = "title">{props.title}</h1>
-                    {/* <ListOfUsers>heald </ListOfUsers> */}
+                        <GridComponent/>
             </div>
         )
 }

@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import Mainbox from './component/mainbox';
+import Mainbox from './mainbox/mainbox';
 
 function App() {
     return ( 
