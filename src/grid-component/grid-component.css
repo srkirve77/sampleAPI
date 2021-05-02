@@ -16,3 +16,32 @@
     margin-top: 2vh;
     display: inline;
 }
+
+.genderlabel {
+    margin-left: 40vh;
+}
+
+.gender_option_label {
+    margin-left: 40vh;
+    margin-top: -2vh;
+}
+
+.statuslabel {
+    margin-left: 60vh;
+    display: inline;
+}
+
+.status_option_label {
+    margin-left: 60vh;
+    margin-top: -2vh;
+}
+
+.genderfilter {
+    margin-top: 0vh;
+    margin-left: 90vh;
+}
+
+.statusfilter {
+    margin-top: -10vh;
+    margin-left: 55vh;
+}
