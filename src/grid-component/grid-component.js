@@ -102,7 +102,7 @@ const GridComponent= () => {
         const data = await res.json()
         console.log(data)
         console.log(JSON.stringify(user))
-        if(data.code/100!==2) {
+        if(parseInt(data.code/100)!==2) {
             var i;
             var msg = ""
             for(i = 0 ; i < data.data.length ; i++) {
